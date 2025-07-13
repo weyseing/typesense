@@ -1,0 +1,28 @@
+# Ignore Typesense data directory
+typesense-data/
+data/
+
+# Ignore environment variable files
+.env
+.env.*
+
+# Ignore Docker-related files that shouldn't be versioned
+*.pid
+*.log
+
+# Node.js (if you have scripts or a client)
+node_modules/
+npm-debug.log
+
+# Python (if you have scripts or a client)
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# General
+*.swp
