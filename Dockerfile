@@ -8,7 +8,7 @@ RUN apt-get update \
 
 # copy files
 COPY . /
-RUN chmod +x /docker-entrypoint.sh
 
 # entrypoint
+RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
