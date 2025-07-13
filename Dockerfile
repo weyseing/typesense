@@ -1,14 +1,32 @@
 FROM typesense/typesense:29.0
 USER root
 
+# copy files
+COPY . /app
+WORKDIR /app
+
 # install dependencies
 RUN apt-get update \
-    && apt-get install -y curl \
+    && apt-get install -y curl tzdata jq \ 
     && rm -rf /var/lib/apt/lists/*
 
-# copy files
-COPY . /
+# terminal settings
+RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 6)\]\\t \\d\\n\[$(tput setaf 2)\][\[$(tput setaf 3)\]\u\[$(tput setaf 1)\]@\[$(tput setaf 3)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\\]\\$ \[$(tput sgr0)\]"' >> /root/.bashrc \
+    && echo "alias grep='grep --color=auto'" >> /root/.bashrc
+
+# timezone
+RUN ln -snf /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime && \
+    echo Asia/Kuala_Lumpur > /etc/timezone
+
+# install python
+RUN apt-get update \
+    && apt-get install -y python3 python3-pip \ 
+    && rm -rf /var/lib/apt/lists/*
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
+# install python library
+RUN pip install -r requirements.txt
 
 # entrypoint
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+RUN chmod +x /app/docker-entrypoint.sh
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
