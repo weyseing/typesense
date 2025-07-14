@@ -1,4 +1,6 @@
 FROM typesense/typesense:29.0
+
+ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
 # copy files
@@ -7,7 +9,7 @@ WORKDIR /app
 
 # install dependencies
 RUN apt-get update \
-    && apt-get install -y curl tzdata jq \ 
+    && apt-get install -y curl tzdata awscli jq docker.io \ 
     && rm -rf /var/lib/apt/lists/*
 
 # terminal settings
