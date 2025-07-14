@@ -9,7 +9,7 @@ WORKDIR /app
 
 # install dependencies
 RUN apt-get update \
-    && apt-get install -y curl tzdata awscli jq docker.io \ 
+    && apt-get install -y curl tzdata awscli jq \ 
     && rm -rf /var/lib/apt/lists/*
 
 # terminal settings
