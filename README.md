@@ -40,7 +40,9 @@
 
 ![image](assets/8.PNG)
 
-- **\*\*MUST\*\* redeploy new ECS Task** to reflect Task Role
+- **\*\*MUST\*\* redeploy new ECS Task (via new Task Definition)** to reflect Task Role
+
+![image](assets/11.PNG)
 
 - Ensure variable below are set in **cli/ecs_set_exec.sh**
     - `REGION`
@@ -55,7 +57,9 @@
 
 ![image](assets/10.PNG)
 
-- **\*\*MUST\*\* redeploy new ECS Task** to reflect EXEC Settings
+- **\*\*MUST\*\* redeploy new ECS Task (via Force New Deploy)** to reflect EXEC Settings
+
+![image](assets/14.PNG)
 
 - Ensure variable below are set in **cli/ecs_ssh.sh**
     - `REGION`
