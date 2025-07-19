@@ -40,6 +40,8 @@
 
 ![image](assets/8.PNG)
 
+- **\*\*MUST\*\* redeploy new ECS Task** to reflect Task Role
+
 - Ensure variable below are set in **cli/ecs_set_exec.sh**
     - `REGION`
     - `CLUSTER_ARN`
@@ -53,9 +55,7 @@
 
 ![image](assets/10.PNG)
 
-- **\*\*MUST\*\* redeploy new ECS Task (via Task Definition)** to reflect EXEC Settings
-
-![image](assets/11.PNG)
+- **\*\*MUST\*\* redeploy new ECS Task** to reflect EXEC Settings
 
 - Ensure variable below are set in **cli/ecs_ssh.sh**
     - `REGION`
