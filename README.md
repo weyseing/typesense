@@ -61,9 +61,10 @@
 
 ![image](assets/14.PNG)
 
-- Ensure variable below are set in **cli/ecs_ssh.sh**
+- Ensure variable below are set in **cli/ecs_ssh.sh** to enter ECS Task.
     - `REGION`
     - `CLUSTER_ARN`
+
 - Run `cli/ecs_ssh.sh <YOUR TASK ID>`
 
-![image](assets/12.PNG)
+![image](assets/13.PNG)
