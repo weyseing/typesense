@@ -12,6 +12,11 @@ RUN apt-get update \
     && apt-get install -y curl tzdata awscli jq \ 
     && rm -rf /var/lib/apt/lists/*
 
+# install aws session manager plugin
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb" && \
+    dpkg -i session-manager-plugin.deb && \
+    rm session-manager-plugin.deb
+
 # terminal settings
 RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 6)\]\\t \\d\\n\[$(tput setaf 2)\][\[$(tput setaf 3)\]\u\[$(tput setaf 1)\]@\[$(tput setaf 3)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\\]\\$ \[$(tput sgr0)\]"' >> /root/.bashrc \
     && echo "alias grep='grep --color=auto'" >> /root/.bashrc

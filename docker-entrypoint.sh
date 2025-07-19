@@ -2,7 +2,7 @@
 
 # start typesense
 echo "[ENTRYPOINT] Starting Typesense server..."
-/opt/typesense-server --data-dir /data --api-key=${TYPESENSE_API_KEY} --enable-cors &
+/opt/typesense-server --data-dir /data --api-key=${TYPESENSE_API_KEY} --enable-cors --listen-address 0.0.0.0 &
 
 # health check
 echo "[ENTRYPOINT] Waiting for Typesense /health endpoint..."
