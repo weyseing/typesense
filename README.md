@@ -1,4 +1,4 @@
-# [Optional] ECR Setup
+# ECR Setup
 - **Create ECR repository.**
 
 ![image](assets/1.PNG)
@@ -12,7 +12,7 @@
         - `AWS_ECR`
     - Run `cli/deploy_ecr.sh`
 
-# [Optional] ECS Setup
+# ECS Setup
 - **Create ECS cluster**
 
 ![image](assets/2.PNG)
@@ -28,7 +28,7 @@
 ![image](assets/4.PNG)
 ![image](assets/5.PNG)
 
-# [Optional] EXEC into ECS Task
+# EXEC into ECS Task
 - **Create Task Role**
     - **\*\*MUST\*\* add `AmazonSSMManagedInstanceCore` policy**
 
@@ -68,3 +68,32 @@
 - Run `cli/ecs_ssh.sh <YOUR TASK ID>`
 
 ![image](assets/13.PNG)
+
+# ALB Setup
+- **Create Target Group**
+
+![image](assets/15.PNG)
+![image](assets/16.PNG)
+![image](assets/17.PNG)
+
+- **Create ALB**
+
+![image](assets/18.PNG)
+![image](assets/19.PNG)
+![image](assets/20.PNG)
+![image](assets/21.PNG)
+
+- **Update ECS**
+
+![image](assets/22.PNG)
+![image](assets/23.PNG)
+![image](assets/24.PNG)
+
+- **Wait Target to be spinned up**
+
+![image](assets/25.PNG)
+
+- **Test via LB DNS**
+
+![image](assets/26.PNG)
+![image](assets/27.PNG)
