@@ -1,8 +1,8 @@
 #!/bin/sh
 
 REGION="ap-southeast-1"
-CLUSTER_ARN="arn:aws:ecs:ap-southeast-1:107698500998:cluster/typesense"
-SERVICE_ARN="arn:aws:ecs:ap-southeast-1:107698500998:service/typesense/typesense-service-1"
+CLUSTER_ARN="arn:aws:ecs:ap-southeast-1:107698500998:cluster/typesense-poc"
+SERVICE_ARN="arn:aws:ecs:ap-southeast-1:107698500998:service/typesense-poc/typesense-poc-service-d3hr8e3a"
 
 # load env
 if [ -f .env ]; then

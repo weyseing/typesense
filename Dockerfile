@@ -34,6 +34,9 @@ RUN ln -sf /usr/bin/python3 /usr/bin/python
 # install python library
 RUN pip install -r requirements.txt
 
+# create /data folder (typesense)
+RUN mkdir /data
+
 # entrypoint
 RUN chmod +x /app/docker-entrypoint.sh
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
