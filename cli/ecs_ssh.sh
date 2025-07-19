@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REGION="ap-southeast-1"
-CLUSTER_ARN="arn:aws:ecs:ap-southeast-1:107698500998:cluster/typesense"
+CLUSTER_ARN="arn:aws:ecs:ap-southeast-1:107698500998:cluster/typesense-poc"
 
 # load env
 if [ -f .env ]; then
