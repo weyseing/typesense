@@ -121,37 +121,6 @@
 ![image](assets/35.PNG)
 ![image](assets/36.PNG)
 
-- **Set EFS File System Policy**
-
-```json
-{
-    "Version": "2012-10-17",
-    "Id": "EFSFileAccessPolicy",
-    "Statement": [
-        {
-            "Sid": "AllowAccessFromECSThroughAccessPoint",
-            "Effect": "Allow",
-            // update Task Role ARN
-            "Principal": {
-                "AWS": "arn:aws:iam::107698500998:role/ecs-typesense-task-role"
-            },
-            "Action": [
-                "elasticfilesystem:ClientMount",
-                "elasticfilesystem:ClientWrite"
-            ],
-            // update EFS ARN
-            "Resource": "arn:aws:elasticfilesystem:ap-southeast-1:107698500998:file-system/fs-0aee593c9e02bcbd9",
-            "Condition": {
-                "StringEquals": {
-                    // update EFS access point ARN
-                    "elasticfilesystem:AccessPointArn": "arn:aws:elasticfilesystem:ap-southeast-1:107698500998:access-point/fsap-0205b099f7a40eb07"
-                }
-            }
-        }
-    ]
-}
-```
-
 - **Set EFS Volume in ECS Task Definition**
 
 ![image](assets/33.PNG)
