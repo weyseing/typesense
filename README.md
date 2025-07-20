@@ -97,3 +97,67 @@
 
 ![image](assets/26.PNG)
 ![image](assets/27.PNG)
+
+# EFS Setup
+- **Create File System**
+
+![image](assets/28.PNG)
+![image](assets/29.PNG)
+
+- **Create Access Point**
+
+![image](assets/30.PNG)
+![image](assets/31.PNG)
+![image](assets/38.PNG)
+
+- **Security Group inbound & outbound**
+    - `EFS security group`: Allow port 2049 in **Inbound**
+    - `ECS security group`: Allow port 2049 in **Outbound**
+
+![image](assets/32.PNG)
+
+- **Add IAM Policy to Task Role**
+
+![image](assets/35.PNG)
+![image](assets/36.PNG)
+
+- **Set EFS File System Policy**
+
+```json
+{
+    "Version": "2012-10-17",
+    "Id": "EFSFileAccessPolicy",
+    "Statement": [
+        {
+            "Sid": "AllowAccessFromECSThroughAccessPoint",
+            "Effect": "Allow",
+            // update Task Role ARN
+            "Principal": {
+                "AWS": "arn:aws:iam::107698500998:role/ecs-typesense-task-role"
+            },
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            // update EFS ARN
+            "Resource": "arn:aws:elasticfilesystem:ap-southeast-1:107698500998:file-system/fs-0aee593c9e02bcbd9",
+            "Condition": {
+                "StringEquals": {
+                    // update EFS access point ARN
+                    "elasticfilesystem:AccessPointArn": "arn:aws:elasticfilesystem:ap-southeast-1:107698500998:access-point/fsap-0205b099f7a40eb07"
+                }
+            }
+        }
+    ]
+}
+```
+
+- **Set EFS Volume in ECS Task Definition**
+
+![image](assets/33.PNG)
+![image](assets/34.PNG)
+![image](assets/37.PNG)
+
+- **Deploy NEW ECS task**
+
+# Check EFS Folder (via EC2)
