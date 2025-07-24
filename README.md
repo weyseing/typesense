@@ -130,3 +130,59 @@
 - **Deploy NEW ECS task**
 
 # Check EFS Folder (via EC2)
+
+- **Create EC2 instance**
+
+![image](assets/39.PNG)
+![image](assets/40.PNG)
+![image](assets/41.PNG)
+![image](assets/42.PNG)
+
+- **\*\*MUST\*\*** allow `PORT 2049` in **Security Group**
+
+- **Change SSH key permission**
+    - `sudo chmod 400 ssh-key-2.pem`
+
+- **SSH inside to EC2**
+    - `ssh -i "ssh-key-2.pem" admin@ec2-13-215-156-78.ap-southeast-1.compute.amazonaws.com`
+
+- **Setup amazon-efs-utils** 
+    - Install dependencies
+        ```shell
+        sudo apt-get update
+        sudo apt-get install -y git make libssl-dev build-essential curl pkg-config nfs-common stunnel4
+        ```
+
+    - Install Rush & Cargo
+        ```shell
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        source "$HOME/.cargo/env"
+        ```
+
+    - Install amazon-efs-utils
+        ```shell
+        cd ~
+        git clone https://github.com/aws/efs-utils.git
+        cd efs-utils
+        ./build-deb.sh
+        ls -l ./build/ # Find the exact .deb filename
+        ```
+
+        ```shell
+        sudo dpkg -i ./build/amazon-efs-utils-<YOUR_VERSION>_amd64.deb # Use the exact filename found
+        sudo apt-get install -f
+        ```
+
+- **Mount to EFS**
+    ```shell
+    sudo mount -t efs -o tls <YOUR EFS ID>:/ <YOUR MOUNT PATH>
+    sudo mount -t efs -o tls fs-*****************:/ /mnt/efs
+    ```
+
+- **Check EFS ID & mount path**
+    ```
+    ps aux | grep -i stunnel | grep -i <YOUR EFS ID> --color=auto
+    ps aux | grep -i stunnel | grep -i fs-************ --color=auto
+    ```
+
+![image](assets/43.PNG)
