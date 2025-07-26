@@ -2,15 +2,10 @@ services:
   typesense:
     build: .
     container_name: typesense
-    restart: on-failure
     ports:
       - "8108:8108"
     volumes:
-      - typesense-data:/data
+      - ./typesense-data:/data
       - .:/app
     env_file:
       - .env
-
-volumes:
-  typesense-data:
-    driver: local

@@ -4,7 +4,7 @@ import typesense
 # client connection
 client = typesense.Client({
     'api_key': os.getenv('TYPESENSE_API_KEY'),
-    'nodes': [{'host': 'localhost', 'port': '8108', 'protocol': 'http'}],
+    'nodes': [{'host':  os.getenv('TYPESENSE_ENDPOINT'), 'port':  os.getenv('TYPESENSE_PORT'), 'protocol': 'http'}], 
     'connection_timeout_seconds': 2
 })
 
