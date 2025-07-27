@@ -122,7 +122,5 @@ if __name__ == "__main__":
         logging.info(f"\n📖 Total documents found (matching query and limit): {len(df_sorted)}") 
         logging.info(f"📖 Displaying latest 10 documents:")
         logging.info(df_sorted.head(10))
-
-        df.to_csv('/app/temp/display.csv', index=False) 
     else:
         logging.error("Failed to retrieve any results from Typesense.")
