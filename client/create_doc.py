@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 client = typesense.Client({
     'api_key': os.getenv('TYPESENSE_API_KEY'),
     'nodes': [{'host':  os.getenv('TYPESENSE_ENDPOINT'), 'port':  os.getenv('TYPESENSE_PORT'), 'protocol': 'http'}],
-    'connection_timeout_seconds': 2
+    'connection_timeout_seconds': 60
 })
 
 # connect
@@ -41,7 +41,7 @@ def create_collection():
             'name': 'payment',
             'fields': [
                 {'name': 'id', 'type': 'string', 'sort': True, 'optional': False},
-                {'name': 'transaction_id', 'type': 'string', 'index': True, 'sort': True},
+                {'name': 'transaction_id', 'type': 'int64', 'index': True, 'sort': True},
                 {'name': 'amount', 'type': 'float', 'sort': True},
                 {'name': 'currency', 'type': 'string', 'facet': True},
                 {'name': 'user_id', 'type': 'string', 'index': True},
@@ -70,7 +70,7 @@ def insert_documents(start_id: int, end_id: int):
             doc_id = str(i) 
             doc = {
                 'id': doc_id,
-                'transaction_id': doc_id, 
+                'transaction_id': int(doc_id), 
                 'amount': round(random.uniform(5.0, 1000.0), 2), 
                 'currency': random.choice(currencies), 
                 'user_id': f'user_{random.randint(10000, 99999)}',
@@ -99,31 +99,6 @@ def insert_documents(start_id: int, end_id: int):
     except Exception as e:
         logging.error(f"❌ Failed to insert documents: {e}")
 
-def get_all_documents():
-    """Fetch all documents from the collection"""
-    all_docs = []
-    page = 1
-    per_page = 250
-    while True:
-        try:
-            search_parameters = {
-                'q': '*',
-                'per_page': per_page,
-                'page': page
-            }
-            results = client.collections['payment'].documents.search(search_parameters)
-            if not results['hits']:
-                break
-            for hit in results['hits']:
-                all_docs.append(hit['document'])
-            if len(results['hits']) < per_page:
-                break
-            page += 1
-        except Exception as e:
-            logging.error(f"❌ Failed to fetch documents page {page}: {e}") 
-            break
-    return all_docs
-
 if __name__ == "__main__":
     # arg parsing
     parser = argparse.ArgumentParser()
@@ -139,24 +114,3 @@ if __name__ == "__main__":
 
     # insert doc
     insert_documents(start_id=args.start_id, end_id=args.end_id)
-
-    # get all doc
-    start_time_fetch_process = time.time() 
-    all_documents = get_all_documents()
-    if all_documents:
-        # sort
-        df = pd.DataFrame(all_documents)
-        df['id'] = pd.to_numeric(df['id'], errors='coerce')
-        df_sorted = df.sort_values(by='id', ascending=False)
-        
-        # log time
-        end_time_fetch_process = time.time()
-        duration_fetch_process = end_time_fetch_process - start_time_fetch_process
-        logging.info(f"\n📖 Fetching and processing {len(df_sorted)} documents took {duration_fetch_process:.4f} seconds!")
-
-        # display
-        print(f"\n📖 Total documents found: {len(df_sorted)}") 
-        logging.info("\n📖 Latest 10 Documents (from Pandas DataFrame):")
-        print(df_sorted.head(10))
-    else:
-        logging.info("\nNo documents found to display.")
