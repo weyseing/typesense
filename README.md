@@ -1,3 +1,9 @@
+# Setup
+- Copy `.env.exmple` to `.env.`
+- Set **ENV value** below
+    - `TYPESENSE_ENDPOINT`: This is `localhost:8108` for local and LB IP for prod.
+- **Up the container with** `docker compose up -d`
+
 # ECR Setup
 - **Create ECR repository.**
 
