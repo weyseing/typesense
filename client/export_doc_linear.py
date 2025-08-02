@@ -40,13 +40,11 @@ def export_typesense_documents(filter_string=None):
         start_time_fetch = time.time()
         exported_data = client.collections["payment"].documents.export(export_parameters)
         end_time_export = time.time()
+        logging.info(f"Typesense export (fetch) completed in {end_time_export - start_time_fetch:.2f} seconds.")
 
         # Process doc
         documents = [json.loads(line) for line in exported_data.splitlines() if line.strip()]
         end_time_processing = time.time()
-
-        # Log time
-        logging.info(f"Typesense export (fetch) completed in {end_time_export - start_time_fetch:.2f} seconds.")
         logging.info(f"Finished process {len(documents)} documents in {end_time_processing - start_time_fetch:.2f} seconds.")
 
         if documents:
