@@ -9,3 +9,9 @@ services:
       - .:/app
     env_file:
       - .env
+    networks:
+      global-net:
+
+networks:
+  global-net:
+    external: true
