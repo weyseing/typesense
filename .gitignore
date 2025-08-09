@@ -4,7 +4,6 @@ data/
 
 # Ignore environment variable files
 .env
-.env.*
 
 # Ignore Docker-related files that shouldn't be versioned
 *.pid
