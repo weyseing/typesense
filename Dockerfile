@@ -9,7 +9,7 @@ WORKDIR /app
 
 # install dependencies
 RUN apt-get update \
-    && apt-get install -y curl tzdata awscli jq \ 
+    && apt-get install -y curl tzdata awscli jq cron \
     && rm -rf /var/lib/apt/lists/*
 
 # install aws session manager plugin
@@ -27,7 +27,7 @@ RUN ln -snf /usr/share/zoneinfo/Asia/Kuala_Lumpur /etc/localtime && \
 
 # install python
 RUN apt-get update \
-    && apt-get install -y python3 python3-pip \ 
+    && apt-get install -y python3 python3-pip \
     && rm -rf /var/lib/apt/lists/*
 RUN ln -sf /usr/bin/python3 /usr/bin/python
 

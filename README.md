@@ -12,7 +12,7 @@
 - **Build & upload to ECR**
     - Ensure env below are set **.env**
         - `AWS_ACCOUNT_ID`
-        - `AWS_REGION`
+        - `AWS_DEFAULT_REGION`
         - `AWS_ACCESS_KEY_ID`
         - `AWS_SECRET_ACCESS_KEY`
         - `AWS_ECR`
