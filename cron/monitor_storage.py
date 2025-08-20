@@ -16,9 +16,6 @@ from dotenv import load_dotenv
 #   - AWS_ACCESS_KEY_ID
 #   - AWS_SECRET_ACCESS_KEY
 
-# env
-load_dotenv()
-
 # logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
